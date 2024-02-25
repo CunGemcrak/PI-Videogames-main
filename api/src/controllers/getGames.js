@@ -2,26 +2,54 @@
 //const { response } = require('express');
 const { Videogame, Genres} = require('../db.js')
 const axios = require('axios')
+const {
+   URL,APPI_KEY
+  } = process.env;
 
-const allVideoGamers = async ()=>{
-    console.log("Api del servicio"+API_KEY);
+const allVideoGamers = async (req, res)=>{
+    console.log("Api del servicio"+URL);
     try {
-        const reponse = await axios.get(URL+`?key=${API_KEY}`)
-       /* .then(response =>{
-            console.log(response.data);
-        })
-        .catch(error =>{
-            console.log('Error'+ error);
-        })*/
-        const allgamersonline = reponse.results
-        console.log("busqueda general desde la api"+ allgamersonline);
-        const [allgamers] = await Videogame.findAll();
+        
+        const reponse1 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=1`)
+         const reponse2 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=2`)
+        const reponse3 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=3`)
+        const reponse4 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=4`)
+     const reponse5 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=5`)
+        const reponse6 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=6`)
+          const reponse7 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=7`)
+        const reponse8 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=8`)
+        const reponse9 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=9`)
+        const reponse0 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=10`)
+    
+          const allgamersonline = { 
+            pagina_1:reponse1.data,
+            pagina_2:reponse2.data,
+            pagina_3:reponse3.data,
+           pagina_4:reponse4.data,
+            pagina_5:reponse5.data,
+            pagina_6:reponse6.data,
+           pagina_7:reponse7.data,
+            pagina_8:reponse8.data,
+            pagina_9:reponse9.data,
+            pagina_0:reponse0.data,
+              
+        }
 
-        if(!allgamers){
-            return res.status(400).json({message: "No hay guardado en la base de datos"})
+     //  const allgamersonline =reponse1.data
+
+        console.log("busqueda general desde la api");
+        
+        const allgamers = await Videogame.findAll();
+
+        if(!allgamers.length){
+       //    res.status(400).json()
+       return res.status(200).json({allgamersonline})
+        //   throw({message: "No hay guardado en la base de datos"})
+          
+           
         }
             
-        return res.status(200).json({allgamersonline, allgamers})
+        return res.status(200).json({allgamersonline,allgamers})
 
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -30,10 +58,14 @@ const allVideoGamers = async ()=>{
 
 const Video_Gamer = async (req, res) =>{
     try {
-        const id = req.params
-        const reponse = axios.get(`URL/${id}&key=${API_KEY}`)
+        const id = req.params.idVideogame
+        console.log("Este es el ID"+id)
+        console.log(URL+`/${id}?key=${APPI_KEY}` )
+        const reponse = await axios.get(`${URL}/${id}?key=${APPI_KEY}`)
 
-        const data_Card =  reponse.data.results     
+        console.log("respuesta"+reponse.date);
+        const data_Card =  reponse.data     
+        
         if(!data_Card){
             return res.status(400).json({message: "No existe Juego"})
         }
@@ -50,11 +82,11 @@ const Video_Gamer = async (req, res) =>{
 const searchByName = async (req, res) => {
     try {
         const name = req.query.name // Obtener la palabra de búsqueda de la query
-        const regex = new RegExp(name, 'i') // Crear una expresión regular para buscar independientemente de mayúsculas o minúsculas
-        console.log("Esto que me muestra"+regex)
+        //const regex = new RegExp(name, 'i') // Crear una expresión regular para buscar independientemente de mayúsculas o minúsculas
+       // console.log("Esto que me muestra"+regex)
         // Buscar en la API
-        const responseAPI = await axios.get(`URL/?search=${name}&key=${API_KEY}`)
-        const gamesAPI = responseAPI.data.results
+        const responseAPI = await axios.get(`${URL}/search?search=${name}&page_size=15&key=${APPI_KEY}`);
+        //const gamesAPI = responseAPI.data
 
         // Buscar en la base de datos
         const gamesDB = await Videogame.findAll({
@@ -117,23 +149,31 @@ const getGenres = async (req, res) => {
     try {
         let genres = [];
 
-        // Verificar si la base de datos está vacía
-        const genresDB = await Genres.findAll();
-        if (genresDB.length === 0) {
-            // Si la base de datos está vacía, obtener los géneros de la API
-            const response = await axios.get(`URL+?key=${API_KEY}`)//'https://api.rawg.io/api/genres');
+      
+           
+            const reponse = await axios.get(`${URL}?key=${APPI_KEY}`)
+         
+             const allgamersonline = reponse.data
+             
+         
+            if (allgamersonline.results && allgamersonline.results.length > 0) {
+                genres = await allgamersonline.results.flatMap(game => game.genres.map(genre => genre.name));
+                        console.log("esto es lo encontrado: "+genres);
 
-            // Extraer los géneros de la respuesta de la API
-           genres = response.data.results.map(result => result.name);
 
+                for (const genre of genres) {
+                    const [genresAll] = await Genres.findOrCreate({
+                        where: { name: genre },
+                        defaults: { name: genre }
+                    });
+
+                }
+            } 
+
+            
+            genres = await Genres.findAll()
         
-        for (const name of genres) {
-            await Genres.create({ name });
-        }
-       
-    } else {
-        genres = genresDB.map(genre => genre.name);
-    }
+
         return res.status(200).json({ genres });
     } catch (error) {
         return res.status(500).json({ message: error.message });

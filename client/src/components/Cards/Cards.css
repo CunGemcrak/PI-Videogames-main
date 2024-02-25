@@ -1,0 +1,8 @@
+.contenedor{
+    margin-top:0;
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribuye uniformemente las columnas */
+    gap: 1px;   
+}

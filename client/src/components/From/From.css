@@ -1,0 +1,133 @@
+.containerCreate{
+    width: 90vw;
+    border: 2px greenyellow solid;
+    margin: 10px auto; /* Auto margen horizontal para centrar el contenedor */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 1s ease-in-out; 
+    border: 5px solid;
+    border-image: linear-gradient(to right, red, rgb(0, 250, 21)) 1;
+    display: flex; /* Aplica flexbox para alinear elementos internos */
+    flex-direction: column; /* Alinea los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+  
+
+    .container_titulo{
+       
+        h1{
+            font-size: 34px;
+            background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; 
+        }
+        
+    }
+    .contenedor_texto{
+       
+        color:greenyellow;
+        font-size: 14px;
+        text-align: justify;
+        width: 100%;
+        display:flex;
+        display: inline-block;
+             
+       input{
+            border: 2px solid rgb(255, 230, 0);
+            background-color: rgb(53, 50, 50);
+            color: white;
+            margin : 10px;
+            
+        }
+        input:focus,
+        input:focus-visible {
+          outline: 4px auto yellow; /* rgb(43, 255, 0);*/
+          background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          font-weight: bold;
+          color: greenyellow;
+         
+        }
+        .error{
+            color:red;
+            font-size: 10px;
+
+        }
+
+
+
+
+
+        
+       
+        
+    }
+    .container_botones{
+        margin:30px;
+        .boton_guardar{
+            border-radius: 10px 0 0 10px;
+           
+           
+            font-size: 14px;
+            width: auto;
+            height: 25px;
+            color:yellow;
+            background-color: green;
+            cursor: pointer;
+        }
+        .boton_guardar:focus,
+        .boton_guardar:focus-visible {
+          outline: 4px auto pink;
+          background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          font-weight: bold;
+          color: white;
+        }
+
+
+
+          
+        .boton_verificar{
+  
+            border-radius: 0 10px 10px 0;
+            font-size: 14px;
+            width: auto;
+            height: 25px;
+            color:yellow;
+            background-color: red;
+            cursor: pointer;
+        }
+        .boton_verificar:focus,
+        .boton_verificar:focus-visible {
+          outline: 4px auto pink;
+          background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          font-weight: bold;
+          color: white;
+        }
+
+
+
+
+
+    }
+
+
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Empieza con opacidad 0 */
+        transform: translateY(800px); /* Empieza desplazado hacia abajo */
+    }
+    to {
+        opacity: 1; /* Termina con opacidad 1 */
+        transform: translateY(0); /* Termina sin desplazamiento */
+    }
+}

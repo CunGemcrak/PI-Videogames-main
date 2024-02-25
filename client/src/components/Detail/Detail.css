@@ -1,0 +1,84 @@
+.containerDetail{
+    display: flex;
+    margin: 30px;
+    padding: 5px;
+    animation: fadeIn 1s ease-in-out; 
+    border: 5px solid;
+    border-image: linear-gradient(to right, red, rgb(1, 255, 22)) 1;
+
+
+
+
+
+    .derecha{
+        width: 50%;
+        animation: fadeIn 1s ease-in-out; 
+        border-radius: 50px;
+        img{
+            width: 100%;
+            border: 2px white groove;
+        }
+    }
+    .izquierda{
+        margin-left: 20px;
+        animation: fadeIn 1s ease-in-out; 
+
+        width: 50%;
+        div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+           
+           color: aliceblue;
+
+                    h1{
+                        justify-content: center;
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: bold; 
+                        text-transform: uppercase;
+                        background-image: linear-gradient(to right, rgb(0, 255, 34), rgb(255, 255, 0));
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;   
+                        }
+                        Link{
+                           color: greenyellow;
+                           cursor: pointer;
+                        div{
+                            font-size: 14px;
+                            font-weight: bold; 
+                            margin-right: 0px;
+                            
+                            text-decoration: none;
+                         color: greenyellow;
+
+                        }
+                        
+                    }
+                    Link:hover{
+                        
+                            color: red;
+                      
+                    }
+            }
+        p{
+            font-size: 12px;
+            text-align: justify;
+            animation: fadeIn 1s ease-in-out; 
+        }
+       
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Empieza con opacidad 0 */
+        transform: translateY(800px); /* Empieza desplazado hacia abajo */
+    }
+    to {
+        opacity: 1; /* Termina con opacidad 1 */
+        transform: translateY(0); /* Termina sin desplazamiento */
+    }
+}

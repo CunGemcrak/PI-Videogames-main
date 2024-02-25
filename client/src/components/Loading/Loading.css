@@ -1,0 +1,47 @@
+.Loadingbody{
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+    overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
+    align-items: center;
+    justify-content: center;
+}
+.fondoinicial{
+    margin: 0;
+    padding: 0;
+    justify-content: center; /* Centramos horizontalmente */
+    align-items: center; /* Centramos verticalmente */
+    width: 100vw;
+    height: 70vh;
+    background-image: url('../../img/videogame.png');
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
+       
+}
+.LoadinBoton{
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    padding: 10px; /*espacio alrededor texto*/
+    background-color: #ff0000; /*color botón*/
+    color: #ffffff; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 50px; /*bordes redondos*/
+    font-weight: bold;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+.LoadinBoton:hover{
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    background-color: #00ff22; /*color botón*/
+    color: #ff0000; /*color texto*/    
+}
+.LoadinBoton:focus,
+.LoadinBoton:focus-visible {
+  outline: 4px auto pink;
+  background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  color: white;
+}

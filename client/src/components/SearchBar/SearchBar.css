@@ -1,0 +1,124 @@
+.containersear{
+    display: flex;
+    width: auto;
+    height: 30px;
+    text-align: left;
+    /*justify-content: flex-end;*/
+    border: solid white 4px;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.logo{
+    background-image: url("../../img/524_supermario.png");
+    width: 30px;
+    height: 30px;
+    margin-left: 2px;
+    margin-right: 5px;
+}
+.accesos{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.botones{
+    margin-right: 5px;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 80px;
+    height: 25px;
+    color:yellow;
+    background-color: green;
+    cursor: pointer;
+}
+
+
+.botones:hover{
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    background-color: #00ff22; /*color botón*/
+    color: #ff0000; /*color texto*/    
+}
+.botones:focus,
+.botones:focus-visible {
+  outline: 4px auto pink;
+  background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  color: white;
+}
+
+
+
+.contenedor_busquda{
+    display: flex;
+    justify-content: center; 
+    gap: 0; 
+    margin: 0;
+    padding: 0;
+    align-items: center;
+
+}
+
+.botonealeatorio{
+  
+    border-radius: 10px 0 0 10px;
+    font-size: 14px;
+    width: auto;
+    height: 25px;
+    color:yellow;
+    background-color: red;
+    cursor: pointer;
+    display: none;
+}
+.botonealeatorio:focus,
+.botonealeatorio:focus-visible {
+  outline: 4px auto pink;
+  background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  color: white;
+}
+
+
+.botonebusqueda{
+   
+    border-radius: 0 10px 10px 0;
+    font-size: 14px;
+    width: auto;
+    height: 25px;
+    color:yellow;
+    background-color: green;
+    cursor: pointer;
+}
+.botonebusqueda:focus,
+.botonebusqueda:focus-visible {
+  outline: 4px auto pink;
+  background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  color: white;
+}
+
+.ingresoinput{
+    border: 2px solid rgb(255, 230, 0);
+    background-color: rgb(53, 50, 50);
+    color: white;
+    
+}
+.ingresoinput:focus,
+.ingresoinput:focus-visible {
+  outline: 4px auto yellow; /* rgb(43, 255, 0);*/
+  background: linear-gradient(to bottom, pink, rgb(8, 235, 45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  color: greenyellow;
+ 
+}

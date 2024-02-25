@@ -1,0 +1,48 @@
+.containerHome{
+    display: flex;
+    width: 100vw;
+   /* border: 2px red solid;*/
+   overflow-x: hidden;
+   
+}
+.manejoimagenmario{
+    margin: 10px;
+
+    width: 15vw;
+    height: 500px;
+   
+}
+.manejoimagenluigui{
+    margin: 10px;
+    width: 15vw;
+    height: 600px;
+   
+}
+.containerHomeCard{
+    margin-top: 2px;
+    width: 70vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribuye uniformemente las columnas */
+    /*gap: 1px;*/
+}
+
+
+.estrella{
+    width: 30px;
+    height: 30px; 
+}
+.anterior{
+    width: 30px;
+    height: 30px; 
+    cursor: pointer;
+    
+}
+.siguiente{
+    width: 30px;
+    height: 30px; 
+    cursor: pointer;
+}
+.pagelabel{
+     margin-top: -10;    
+}

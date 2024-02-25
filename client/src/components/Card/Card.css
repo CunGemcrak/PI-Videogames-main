@@ -1,0 +1,32 @@
+.principal{
+    display: flex;
+    cursor: pointer;
+  
+}
+
+.containerCard{
+    width: 160px;
+    height: 180px;
+    border: yellow solid 2px;
+    background-color: white;
+    margin: 10px;
+    
+}
+
+
+.imagengame{
+    width: 150px;
+    height: 130px;
+    border: groove;
+    border: solid 2px red;
+}
+.submenuCard{
+    border: green 2px solid;
+    color: white;
+    background-color: black;
+    height: 40px;
+}
+.textocards{
+    font-size: 12px;
+    color:white;
+}
