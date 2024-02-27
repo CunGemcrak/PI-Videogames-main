@@ -20,17 +20,19 @@ import Home from './components/Home/Home.js';
 
 
 //datos para el dispach
-import { useDispatch, useSelector } from 'react-redux';
-import {busquedaAll} from './Redux/actions.js'
+import { useDispatch } from 'react-redux';
+import {busquedaAll, genres} from './Redux/actions.js'
+
 
 
 function App() {
 
   const location = useLocation()
   const [access, setAccess] = useState(false);
- // const [busqueda, setBusqueda] = useState([]);
+  //const [busqueda, setBusqueda] = useState([]); No lo estoy utilizando 
   const dispatch = useDispatch(); 
-  const busqueda = useSelector(state => state.allVideoGamer.pagina_1);
+  
+  //const busqueda = useSelector(state => state.allVideoGamer); Ya no lo estoy utilizando 
 
  
 
@@ -43,7 +45,8 @@ function App() {
     const fetchData = async () => {
       try {
        
-                      dispatch(busquedaAll());
+                     dispatch(busquedaAll());
+                     dispatch(genres());
                      setAccess(true);
                       
                        
@@ -82,10 +85,11 @@ function App() {
        
       <Routes>
               <Route path='/' element={<Loading/>}/>
-              <Route path='/home' element={<Home props={busqueda}/>}/>
+              <Route path='/home' element={<Home/>}/>
               <Route path='/detail/:id' element={<Detail/>}/>
               <Route path='/form' element={<Form/>}/>
               <Route path='/about' element={<About/>}/>
+
              
       </Routes>
       </div>

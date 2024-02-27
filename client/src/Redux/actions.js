@@ -1,4 +1,4 @@
-import {BUSQUEDA, BUSCARALL} from './action-types.js'
+import {BUSQUEDA, BUSCARALL, FILTER, GENRES, COPY, INDIVIDUALBUSQUEDA, INDIVIDUALAPI} from './action-types.js'
 import axios from 'axios';
 
 export const Listado = ()=>{
@@ -59,7 +59,7 @@ export const busquedaAll =() =>{
                         name: element.name,
                         background_image: element.background_image,
                         rating: element.rating,
-                        genres: element.genres[0].name
+                        genres: element.genres[0].name 
                     }));
                     priemrabusqueda.push(...formattedResults);
 
@@ -110,3 +110,72 @@ export const busquedaAll =() =>{
 }
 
 
+
+export const genres = ()=>{
+    return async (dispatch)=> {
+        try {
+           
+              
+                const endpoint = 'http://localhost:3001/genres/'
+                const {data} = await axios.get(endpoint)
+                const genres = data.elementos
+                dispatch({
+                    type: GENRES,
+                    payload: genres,
+                })
+        
+        } catch (error) {
+            console.error('Error al mostrar el genres:', error);
+        }  
+    
+    }
+}
+
+
+
+export const busquedaIndividual=(data)=>{
+    return{type: INDIVIDUALBUSQUEDA, payload: data}
+    /*return async (dispatch) => { 
+                                try {
+                                    const endpoint = 'http://localhost:3001/videogames/:'
+                                                const {data} = await axios.get(endpoint+data)
+                                                const {data_Card} = data
+                                                dispatch({
+                                                    type: INDIVIDUALBUSQUEDA,
+                                                    payload: genres,
+                                                })
+                                } catch (error) {
+                                    console.error('Error al mostrar la busqueda:', error);
+                                }
+
+             }*/
+}
+
+
+export const busquedaIndApi=(data)=>{
+    return async (dispatch)=>{
+                        try {
+                            const endpoint = 'http://localhost:3001/videogames/:'
+                                                                const resultatadoApi = await axios.get(endpoint+data)
+                                                                const {data_Card} = resultatadoApi
+                                                                dispatch({
+                                                                    type: INDIVIDUALAPI,
+                                                                    payload: data_Card,
+                                                                })
+
+
+                        } catch (error) {
+                            console.error('Error al mostrar la busqueda:', error);
+                        }
+    }
+}
+
+
+
+export const fiterCard = (gender) =>{
+    return {type:FILTER , payload: gender }
+}
+
+export const CopiaAllVideoGamer = ()=>{
+    return {type:COPY, payload:"copia"}
+}

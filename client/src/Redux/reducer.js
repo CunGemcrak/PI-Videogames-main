@@ -1,10 +1,10 @@
-import {BUSQUEDA, BUSCARALL} from './action-types';
+import {BUSQUEDA, BUSCARALL, FILTER, GENRES, COPY, INDIVIDUALBUSQUEDA, INDIVIDUALAPI} from './action-types';
 
 const initialState = {
    
     allVideoGamer: [],
-    videoGamer:{},
-    test:"test"
+    videoGamer:[],
+    genres:[]
 }
 
 const reducer = (state= initialState, {type, payload})=>{
@@ -15,7 +15,36 @@ const reducer = (state= initialState, {type, payload})=>{
         case BUSQUEDA:
             return {...state, allVideoGamer: payload}
         case BUSCARALL:
-            return {...state, allVideoGamer: payload}
+            return {...state, allVideoGamer: payload, videoGamer:payload}
+        case FILTER:
+            
+                
+                const allCharactersFiltered =state.videoGamer.filter(element=> element.genres.includes(payload))
+                return{
+                    ...state,
+                    allVideoGamer:allCharactersFiltered,
+                   
+                }  
+            case COPY:
+                return{...state, allVideoGamer: state.videoGamer}
+
+            
+            case GENRES:
+                return{
+                    ...state, genres:payload
+                } 
+
+            case INDIVIDUALBUSQUEDA:
+                const busquedaporname =state.videoGamer.filter(element=> element.name.includes(payload))
+                return {
+                    ...state,
+                    allVideoGamer:busquedaporname,
+                }  
+            case INDIVIDUALAPI:
+                return{
+                    ...state,
+                    allVideoGamer: payload
+                }
         default:
             return {...state}
     }
