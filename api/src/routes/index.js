@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/videogames', allVideoGamers)
 router.get('/videogames/:idVideogame', Video_Gamer)
-router.get('/videogames/:name', searchByName)
+router.get('/videogames/name/:name', searchByName)
 router.post('/videogames', sav_videogamer)
 router.get('/genres', getGenres)
 

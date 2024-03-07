@@ -10,6 +10,9 @@ const sav_videogamer = async (req,res)=>{
     if(!name || !description || !platforms || !image || !release_date || !rating || !genres ){
         return res.status(404).json({message: "Faltan datos "})
     }
+    if(image.length > 250){
+        return res.status(404).json({message: "La url de la imagen es muy larga"})
+    }
 
       // Verificar si ya existe un videojuego con el mismo nombre
       const existingGame = await Videogame.findOne({ where: { name } });
@@ -30,7 +33,7 @@ const sav_videogamer = async (req,res)=>{
         where: { name: genres },
         defaults: { name: genres }
     });
-
+    await create.addGenre(genre);
     /*
     if(!created){
         return res.status(400).json({message: "No se pudo crear el genero"})

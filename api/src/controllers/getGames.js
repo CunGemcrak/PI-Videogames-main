@@ -2,7 +2,7 @@
 //const { response } = require('express');
 const { Videogame, Genres} = require('../db.js')
 const axios = require('axios')
-const {URL,APPI_KEY} = process.env;
+const {URL, URL2,APPI_KEY} = process.env;
 
 const allVideoGamers = async (req, res)=>{
     console.log("Api del servicio"+URL);
@@ -11,9 +11,9 @@ const allVideoGamers = async (req, res)=>{
         const reponse1 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=1`)
          const reponse2 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=2`)
         const reponse3 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=3`)
-    /*    const reponse4 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=4`)
+        const reponse4 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=4`)
      const reponse5 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=5`)
-        const reponse6 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=6`)
+    /*    const reponse6 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=6`)
           const reponse7 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=7`)
         const reponse8 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=8`)
         const reponse9 = await axios.get(`${URL}?key=${APPI_KEY}&limit=500&page=9`)
@@ -24,9 +24,9 @@ const allVideoGamers = async (req, res)=>{
             pagina_1:reponse1.data,
             pagina_2:reponse2.data,
             pagina_3:reponse3.data,
-          /* pagina_4:reponse4.data,
+          pagina_4:reponse4.data,
             pagina_5:reponse5.data,
-            pagina_6:reponse6.data,
+          /*  pagina_6:reponse6.data,
            pagina_7:reponse7.data,
             pagina_8:reponse8.data,
             pagina_9:reponse9.data,
@@ -109,7 +109,7 @@ const searchByName = async (req, res) => {
     }
 }
 
-
+/*
 const sav_videogamer = async (req,res)=>{
    try {
     const { name, description, platforms, image, release_date, rating, genres  } = req.body
@@ -144,12 +144,12 @@ const sav_videogamer = async (req,res)=>{
 }
 
 
-
+*/
 
 const getGenres = async (req, res) => {
     try {
        
-        const endpoint = 'http://localhost:3001/videogames/'
+      /*  const endpoint = 'http://localhost:3001/videogames/'
         const {data} = await axios.get(endpoint)
        
         
@@ -165,19 +165,21 @@ const getGenres = async (req, res) => {
 
             }
 
-        }
-console.log("que tengo "+JSON.stringify(priemrabusqueda))
+        }*/
 
-priemrabusqueda.map(element=>{
+        
+        const {data} = await axios.get(`${URL2}?key=${APPI_KEY}`)
+        const results = data.results
+
+
+
+results.map(element=>{
     Genres.findOrCreate({
-        where: { name: element.genres},
-        defaults: { name:element.genres}
+        where: { name: element.name},
+        defaults: { name:element.name}
  }
 )})
-
-/*
-               
-            */
+//console.log("que tengo "+JSON.stringify(results))
             
            const elementos = await Genres.findAll()
       
@@ -193,6 +195,6 @@ module.exports = {
     allVideoGamers,
     Video_Gamer,
     searchByName,
-    sav_videogamer,
+  //  sav_videogamer,
     getGenres
 }

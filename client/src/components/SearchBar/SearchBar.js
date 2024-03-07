@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import './SearchBar.css'
 import logo from '../../img/524_supermario.png';
@@ -12,7 +12,8 @@ import { useDispatch } from 'react-redux';
 
 
 const SearchBar = () =>{
-  const [userData, setUserData]=useState({search:''});
+//  const [userData, setUserData]=useState({search:''});
+const [searchValue, setSearchValue] = useState('');
 
 const dispatch = useDispatch(); 
 
@@ -21,17 +22,34 @@ const dispatch = useDispatch();
 
 
 
+useEffect(() => {
+  if (searchValue.trim() === '' || !searchValue) {
+    dispatch(CopiaAllVideoGamer())
+  } else {
+    dispatch(busquedaIndividual(searchValue))
+  
+  }
+}, [searchValue, dispatch]);
+
+
+
+
+
+
+
 const hondlebusqueda = (event) =>{
-  setUserData({
+/*  setUserData({
     ...userData,
     [event.target.name]:event.target.value
 })
 
-  if(!userData.search){
+  if(userData.search.trim()==='' || !userData.search){
    dispatch(CopiaAllVideoGamer())
   }else{
   dispatch(busquedaIndividual(userData.search))
-  }
+  }*/
+
+  setSearchValue(event.target.value);
 
 }
   
@@ -69,7 +87,7 @@ const hondlebusqueda = (event) =>{
                 <input 
                   type="text" 
                   name="search"  
-                  value={userData.search}
+                  value={searchValue}
                   onChange={hondlebusqueda}
                   className="ingresoinput"/>
             </div>

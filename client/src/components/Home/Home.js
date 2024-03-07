@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState,useEffect} from "react"
 import Cards from "../Cards/Cards.js";
 import './Home.css';
 import saltomario from '../../img/saltomario.png'
@@ -7,6 +7,7 @@ import estrella from '../../img/estrella.png'
 import derecha from '../../img/derecha.png'
 import izquieda from '../../img/izquierda.png'
 import cuadrored from '../../img/blocred.png'
+//import download from '../../img/loading/loading_mario1.webp'
 
 import { useSelector,useDispatch } from 'react-redux';
 import {fiterCard, CopiaAllVideoGamer} from '../../Redux/actions.js'
@@ -24,6 +25,7 @@ const Home =  ()=>{
     const dispatch = useDispatch(); 
 
     // Obtener los valores almacenados del almacenamiento local al cargar la página
+    
 const storedStartIndex = parseInt(localStorage.getItem('startIndex')) || 0;
 const storedEndIndex = parseInt(localStorage.getItem('endIndex')) || 15;
 const storedPage = parseInt(localStorage.getItem('page')) || 1;
@@ -31,22 +33,46 @@ const storedPage = parseInt(localStorage.getItem('page')) || 1;
     const [startIndex, setStartIndex] = useState(storedStartIndex)
     const [endIndex, setEndIndex] = useState(storedEndIndex)
     const [page, setPage ] = useState(storedPage)
+   // const [loading, setLoading]= useState(true)
    
 
 
-    
+   
     useEffect(() => {
-        // Guardar los valores de la paginación en el almacenamiento local al cambiar
+        
         localStorage.setItem('startIndex', startIndex);
         localStorage.setItem('endIndex', endIndex);
-        localStorage.setItem('page', page);       
-    }, [startIndex, endIndex, page]);
+        localStorage.setItem('page', page); 
+          
+        if(busqueda.length < 15){
+            setStartIndex(0);
+            setEndIndex(15);
+            setPage(1)
+           
+            }
+
+           
+         
+  
+             
+    }, [startIndex, endIndex, page, busqueda.length]);
 
 
 const hondleFilter=(event)=>{
     if(event.target.value === "No"){
         
+        
+        
+      
+        
+
+
         dispatch(CopiaAllVideoGamer("No"))
+        
+    
+    
+        
+       
     
         
         setStartIndex(0)
@@ -58,7 +84,7 @@ const hondleFilter=(event)=>{
     }else{
        // alert("entro al event filtrar y selecciono "+ event.target.value)
       
-       dispatch(fiterCard(event.target.value));
+        dispatch(fiterCard(event.target.value));
         setStartIndex(0)
         setEndIndex(15)
         setPage(1)
@@ -117,8 +143,16 @@ const handleback = ()=>{
                     <img src={saltomario} alt="salto mario" className="manejoimagenmario"/>
                 </div>
                  <div className="containerHomeCard">
-              
-                 <Cards className="containerHomeCard" startIndex={startIndex} endIndex={endIndex} busqueda={busqueda}/>
+                                        {
+                                           // loading === true
+                                          //  ?<div><img src={download} alt="Loading"/> </div>
+                                           // :
+                                           
+                                        }
+                                        <Cards className="containerHomeCard" startIndex={startIndex} endIndex={endIndex} busqueda={busqueda}/>
+                               
+                                        
+                                     
                     
                     </div>
                     <div>

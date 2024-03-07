@@ -56,7 +56,7 @@ export const busquedaAll =() =>{
                     const results = data.allgamersonline[pagina].results;
                     const formattedResults = results.map(element => ({
                         id: element.id,
-                        name: element.name,
+                        name: element.name.toUpperCase(),
                         background_image: element.background_image,
                         rating: element.rating,
                         genres: element.genres[0].name 
@@ -134,7 +134,7 @@ export const genres = ()=>{
 
 
 export const busquedaIndividual=(data)=>{
-    return{type: INDIVIDUALBUSQUEDA, payload: data}
+    return{type: INDIVIDUALBUSQUEDA, payload: data.toUpperCase()}
     /*return async (dispatch) => { 
                                 try {
                                     const endpoint = 'http://localhost:3001/videogames/:'
@@ -155,7 +155,7 @@ export const busquedaIndividual=(data)=>{
 export const busquedaIndApi=(data)=>{
     return async (dispatch)=>{
                         try {
-                            const endpoint = 'http://localhost:3001/videogames/:'
+                            const endpoint = 'http://localhost:3001/videogames/name/:'
                                                                 const resultatadoApi = await axios.get(endpoint+data)
                                                                 const {data_Card} = resultatadoApi
                                                                 dispatch({

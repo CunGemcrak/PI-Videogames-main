@@ -16,7 +16,7 @@ const Card = ({data})=>{
                 <img src={background_image} alt={name} className='imagengame'/>
              <div className='submenuCard'>
                 <div className='textocards'>{name}</div>
-                <div className='textocards'>{genres} </div>
+                <div className='textocards2'>{genres} </div>
                
              </div>
             </div>

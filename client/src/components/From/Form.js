@@ -38,17 +38,24 @@ const Form = ()=>{
 
 
 
-const handleGuardar =(event)=>{
+const handleGuardar =async (event)=>{
 
     event.preventDefault(); //bloquea el recargar de la pagina 
   
 
 try {
     const endpoint = 'http://localhost:3001/videogames/'
-    const {data} =  axios.post(endpoint, userData)
-    console.log(data);
+    const response = await axios.post(endpoint, userData);
+    console.log(response.data.message);
+    alert(response.data.message)
 } catch (error) {
     console.error('Error al mostrar Juegos:', error);
+    alert("Error al guardar la informacion")
+    error.response.data.message !== undefined //|| error.response.data.message === true
+    ? console.log(error.response.data.message)
+    : console.log(error.response.data.error)
+    
+
 }
 
 
@@ -192,7 +199,7 @@ const handleLimpiar = () => {
             </div>
            
            <div className="container_botones">
-            <button className="boton_guardar">Enviar</button> 
+            <button className="boton_guardar" onClick={handleGuardar}>Enviar</button> 
             <button className="boton_verificar" onClick={handleLimpiar}>Verificar</button> 
 
            </div>

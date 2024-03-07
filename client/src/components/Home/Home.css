@@ -8,19 +8,20 @@
 .manejoimagenmario{
     margin: 10px;
 
-    width: 15vw;
+    width: 10vw;
     height: 500px;
    
 }
 .manejoimagenluigui{
     margin: 10px;
-    width: 15vw;
+    width: 10vw;
     height: 600px;
+    float: right;
    
 }
 .containerHomeCard{
     margin-top: 2px;
-    width: 70vw;
+    width: 65vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; /* Distribuye uniformemente las columnas */
@@ -72,4 +73,9 @@ z-index: 2;
     float: right;
     z-index: 1;
     
+}
+
+.cargando{
+    border-radius: 100%;
+    background-image: black;
 }

@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const reducer = (state= initialState, {type, payload})=>{
-    console.log("entro al reducer la informacion" + payload );
+    console.log("entro al reducer la informacion" + payload);
     
     
     switch( type ){
@@ -17,9 +17,12 @@ const reducer = (state= initialState, {type, payload})=>{
         case BUSCARALL:
             return {...state, allVideoGamer: payload, videoGamer:payload}
         case FILTER:
-            
+          //  const valor = payload.toLowerCase();
                 
-                const allCharactersFiltered =state.videoGamer.filter(element=> element.genres.includes(payload))
+               // const allCharactersFiltered =state.videoGamer.filter(element=> element.genres.includes(payload))
+             //  const allCharactersFiltered =state.videoGamer.filter(element=> element.genres.toUpperCase().includes(payload))
+              
+              const allCharactersFiltered = state.videoGamer.filter(element => element.genres.includes(payload));
                 return{
                     ...state,
                     allVideoGamer:allCharactersFiltered,

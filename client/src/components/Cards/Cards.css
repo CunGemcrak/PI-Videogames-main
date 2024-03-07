@@ -6,3 +6,20 @@
     justify-content: space-between; /* Distribuye uniformemente las columnas */
     gap: 1px;   
 }
+
+.verificar{
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    .sinJuego{
+                font-size: 50px;
+                font-weight: bold;
+                text-decoration: solid underline red;
+    }
+    .imgSinjuego{
+                width: 50vw;
+                height: auto;
+    }
+}
