@@ -16,6 +16,8 @@
 
 .imagengame{
     width: 150px;
+    min-width: 150px;
+    min-height: 130px;
     height: 130px;
     border: groove;
     border: solid 2px red;

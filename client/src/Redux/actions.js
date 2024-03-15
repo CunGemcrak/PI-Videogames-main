@@ -1,6 +1,6 @@
-import {BUSQUEDA, BUSCARALL, FILTER, GENRES, COPY, INDIVIDUALBUSQUEDA, INDIVIDUALAPI} from './action-types.js'
+import { BUSCARALL, FILTER, GENRES, COPY, INDIVIDUALBUSQUEDA, INDIVIDUALAPI} from './action-types.js'
 import axios from 'axios';
-
+/*
 export const Listado = ()=>{
     return async (dispatch)=>{
         try {
@@ -37,13 +37,13 @@ export const Listado = ()=>{
 
     }
 }
-
+*/
 
 export const busquedaAll =() =>{
 
     return async (dispatch)=>{
         try {
-            console.log("entro en la busqueda");
+            //console.log("entro en la busqueda");
             const endpoint = 'http://localhost:3001/videogames/'
             const {data} = await axios.get(endpoint)
            
@@ -59,46 +59,32 @@ export const busquedaAll =() =>{
                         name: element.name.toUpperCase(),
                         background_image: element.background_image,
                         rating: element.rating,
-                        genres: element.genres[0].name 
+                        genres: element.genres[0].name, 
+                        api: 'API'
                     }));
                     priemrabusqueda.push(...formattedResults);
 
                 }
+               
 
             }
+           // console.log(data.allgamers);
+           if(data.allgamers!==undefined){
+            const result2 = data.allgamers.map(element =>({
+                        id: 'DB'+element.id,
+                        name: element.name.toUpperCase(),
+                        background_image: element.image,
+                        rating: element.rating,
+                        genres:"NULL", 
+                        api: 'DB'
+            }))
+           // const [datos] = result2
 
-
-
-
-        /*    pagina.map((element) => {
-                const results = element.results
-                console.log("datos "+results.id +' - '+results.name);                  
-                  return {
-                                      id: results.id,
-                                      name: results.name,
-                                      background_image: results.background_image,
-                                      rating: results.rating,
-                                      genres: results.genres[0].name,                           
-                                    }
-
-            } )
-         */
-
-/*
-          const priemrabusqueda =  results.map(element => {
-                console.log("datos "+element.id +' - '+element.name);                  
-                  return {
-                                      id: element.id,
-                                      name: element.name,
-                                      background_image: element.background_image,
-                                      rating: element.rating,
-                                      genres: element.genres[0].name,                           
-                                    }
-                                  });
-
-                               //   console.log("mostrando busqueda"+ JSON.stringify(priemrabusqueda))
-                               */
+            result2.forEach(datos => {
+                priemrabusqueda.push(datos);
+            });
             
+        }
             dispatch({ 
                 type: BUSCARALL,
                 payload: priemrabusqueda,   
@@ -135,20 +121,7 @@ export const genres = ()=>{
 
 export const busquedaIndividual=(data)=>{
     return{type: INDIVIDUALBUSQUEDA, payload: data.toUpperCase()}
-    /*return async (dispatch) => { 
-                                try {
-                                    const endpoint = 'http://localhost:3001/videogames/:'
-                                                const {data} = await axios.get(endpoint+data)
-                                                const {data_Card} = data
-                                                dispatch({
-                                                    type: INDIVIDUALBUSQUEDA,
-                                                    payload: genres,
-                                                })
-                                } catch (error) {
-                                    console.error('Error al mostrar la busqueda:', error);
-                                }
 
-             }*/
 }
 
 

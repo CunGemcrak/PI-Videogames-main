@@ -5,11 +5,17 @@ import axios from 'axios';
 //validaciond de datos
 
 import validation from '../Validation/validation.js'
+//Llamado a la actions 
+import { useDispatch } from 'react-redux';
+import { busquedaAll } from '../../Redux/actions.js';
+
 
 
 
 
 const Form = ()=>{
+
+    const dispatch = useDispatch(); 
     const [errors, setErrors] = useState({});
     const [userData, setUserData]=useState({
         name:'', 
@@ -45,9 +51,13 @@ const handleGuardar =async (event)=>{
 
 try {
     const endpoint = 'http://localhost:3001/videogames/'
-    const response = await axios.post(endpoint, userData);
-    console.log(response.data.message);
+    const response = await axios.post(endpoint, userData)
+    console.log(response.data.message)
     alert(response.data.message)
+    dispatch(busquedaAll())
+    handleLimpiar();
+
+
 } catch (error) {
     console.error('Error al mostrar Juegos:', error);
     alert("Error al guardar la informacion")
@@ -74,6 +84,10 @@ const handleLimpiar = () => {
     });
     setErrors({});
 }
+
+
+
+
    
     return (
     
@@ -200,7 +214,7 @@ const handleLimpiar = () => {
            
            <div className="container_botones">
             <button className="boton_guardar" onClick={handleGuardar}>Enviar</button> 
-            <button className="boton_verificar" onClick={handleLimpiar}>Verificar</button> 
+            <button className="boton_verificar" onClick={handleLimpiar}>Limpiar</button> 
 
            </div>
            </form>
@@ -209,3 +223,27 @@ const handleLimpiar = () => {
 }
 
 export default Form;
+
+
+//codigos pendientes para implementar 
+
+/*
+const updateVideogame = async () => {
+    try {
+        const response = await axios.put(`http://localhost:3001/videogames/${id}`, {
+            name: newName,
+            description: newDescription,
+            platforms: newPlatforms,
+            image: newImage,
+            release_date: newReleaseDate,
+            rating: newRating,
+            genres: newGenres
+        });
+        console.log(response.data.message);
+        
+    } catch (error) {
+        console.error('Error al actualizar el videojuego:', error);
+    }
+};
+
+*/

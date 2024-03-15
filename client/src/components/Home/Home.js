@@ -26,18 +26,15 @@ const Home =  ()=>{
 
     // Obtener los valores almacenados del almacenamiento local al cargar la página
     
-const storedStartIndex = parseInt(localStorage.getItem('startIndex')) || 0;
-const storedEndIndex = parseInt(localStorage.getItem('endIndex')) || 15;
-const storedPage = parseInt(localStorage.getItem('page')) || 1;
+    const storedStartIndex = parseInt(localStorage.getItem('startIndex')) || 0;
+    const storedEndIndex = parseInt(localStorage.getItem('endIndex')) || 15;
+    const storedPage = parseInt(localStorage.getItem('page')) || 1;
 
     const [startIndex, setStartIndex] = useState(storedStartIndex)
     const [endIndex, setEndIndex] = useState(storedEndIndex)
     const [page, setPage ] = useState(storedPage)
    // const [loading, setLoading]= useState(true)
-   
-
-
-   
+     
     useEffect(() => {
         
         localStorage.setItem('startIndex', startIndex);
@@ -50,45 +47,26 @@ const storedPage = parseInt(localStorage.getItem('page')) || 1;
             setPage(1)
            
             }
-
-           
-         
-  
              
     }, [startIndex, endIndex, page, busqueda.length]);
 
 
 const hondleFilter=(event)=>{
     if(event.target.value === "No"){
-        
-        
-        
-      
-        
-
-
+         
         dispatch(CopiaAllVideoGamer("No"))
-        
-    
-    
-        
-       
-    
-        
         setStartIndex(0)
         setEndIndex(15)
         setPage(1)
-       
-
-       
+           
     }else{
        // alert("entro al event filtrar y selecciono "+ event.target.value)
-      
+     
         dispatch(fiterCard(event.target.value));
         setStartIndex(0)
         setEndIndex(15)
         setPage(1)
-       
+     
        // Actualiza busqueda utilizando useState
        //setBusqueda(useSelector((state) => state.allVideoGamer));
     }
@@ -101,13 +79,13 @@ const handleNex = ()=>{
 
     if(endIndex < busqueda.length ){
         setStartIndex(startIndex + 15);
-            setEndIndex(endIndex + 15);
-            setPage(page+1)
+        setEndIndex(endIndex + 15);
+        setPage(page+1)
             
     }else{ 
         setStartIndex(0);
-            setEndIndex(15);
-            setPage(1)
+        setEndIndex(15);
+        setPage(1)
     }
 
    
@@ -130,12 +108,10 @@ const handleback = ()=>{
                 <div>
                 <div className="ordenar">
               <select className="filtro"   onChange={hondleFilter}>
-
-               
-                              <option value="No">Selecciona filtro</option>
-                                               {
-                     genres.map((element , index)=> (<option key={element.id}  value={element.name}>{element.name}</option>))
-                }
+                    <option value="No">Selecciona filtro</option>
+                            {
+                        genres.map((element )=> (<option key={element.id}  value={element.name}>{element.name}</option>))
+                    }
               </select>
               <img src={cuadrored} alt="Imagen cuadro" className="imagen-ordenar" />
             </div>
